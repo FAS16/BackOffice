@@ -1,0 +1,39 @@
+﻿@model List<RegistrationEngine.Models.Domain.Course>
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Mine fag</h2>
+
+<table id="courses" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Titel</th>
+            <th>Id</th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (var course in Model) 
+                 { 
+                     <tr>
+                         <td>@course.Title</td>
+                         <td>@course.Id</td>
+                     </tr>
+        }
+    </tbody>
+
+
+</table>
+
+
+@section scripts {
+    <script>
+    $(document).ready(function () {
+        $("#courses").DataTable();
+
+    });
+    </script>
+}
