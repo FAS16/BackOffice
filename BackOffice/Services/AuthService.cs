@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 
 namespace BackOffice.Services
@@ -9,26 +10,44 @@ namespace BackOffice.Services
     {
 
         public static readonly string TokenString = "ApiAccessToken";
-        public static readonly string BaseUrl = "https://localhost:44305";
+        public static readonly string TokenExpireDate = "TokenExpireDate";
+        public static readonly string BaseUrl = "https://attendingengine20191213102651.azurewebsites.net/";
+        private static HttpClient HttpClient;
+
+        public AuthService()
+        {
+        }
+
+
+        public static HttpClient GetHttpClient()
+        {
+            if (HttpClient == null)
+            {
+                HttpClient = new HttpClient();
+            }
+
+            return HttpClient;
+        }
 
         public static bool IsAuthenticated()
         {
 
-            var token = Models.Domain.User.Instance.Token;
+            var token = (string) HttpContext.Current.Session[TokenString];
+            var expireDate = (string) HttpContext.Current.Session[TokenExpireDate];
 
-            if (token == null)
+            if (token == null || expireDate == null)
 
             {
-                HttpContext.Current.Session[TokenString] = null;
+                SignOut();
                 return false;
             }
 
-            var expiresIn = DateTime.Parse(token.Expires);
+            var expiresIn = DateTime.Parse(expireDate);
 
             if (expiresIn <= DateTime.UtcNow)
             {
 
-                HttpContext.Current.Session[TokenString] = null;
+                SignOut();
 
                 return false;
             }
@@ -36,6 +55,11 @@ namespace BackOffice.Services
             return true;
 
 
+        }
+
+        public static string GetBearerToken()
+        {
+            return "Bearer " + HttpContext.Current.Session[TokenString];
         }
 
         public static void SignOut()

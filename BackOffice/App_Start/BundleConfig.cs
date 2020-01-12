@@ -24,9 +24,9 @@ namespace BackOffice
 
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-united.css",
+                      "~/Content/bootstrap-yeti.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
         }
     }
 }

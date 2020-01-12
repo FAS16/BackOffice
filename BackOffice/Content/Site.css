@@ -22,3 +22,28 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.btn-btm-margin {
+    margin-bottom: 20px;
+}
+
+.bgbg {
+    background: #fae1b4 
+}
+
+.field-validation-error {
+    color: red;
+}
+
+.input-validation-error {
+    border: 2px solid red;
+}
+
+.validation-summary-errors {
+    color: red;
+}
+
+.delete-x {
+    color: red;
+    
+}

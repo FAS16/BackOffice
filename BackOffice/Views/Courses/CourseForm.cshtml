@@ -1,0 +1,46 @@
+﻿@model BackOffice.Models.ViewModels.CourseFormViewModel
+
+@{
+    ViewBag.Title = @Model.PageTitle;
+}
+
+<h2>@Model.Title</h2>
+
+@Html.ValidationSummary(true, "Please fix the following errors.")
+
+@using (Html.BeginForm("Save", "Courses"))
+{
+
+
+    if (Model.Id != 0)
+    {
+        <div class="form-group">
+            <p>Id @Model.Id</p>
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Title)
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Teacher)
+        @Html.DropDownListFor(m => m.Teacher.Id, new SelectList(Model.Teachers, "Id", "Name"), new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Title)
+
+    </div>
+
+
+    @Html.HiddenFor(m => m.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+
+}
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval");
+}

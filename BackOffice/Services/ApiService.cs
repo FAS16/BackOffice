@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using BackOffice.Models.Domain;
-using RegistrationEngine.Models.Domain;
 
 namespace BackOffice.Services
 {

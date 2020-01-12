@@ -134,6 +134,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClassesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -141,13 +142,20 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Auth\BearerToken.cs" />
-    <Compile Include="Models\Domain\AttendanceRecord.cs" />
+    <Compile Include="Models\Domain\Attendance.cs" />
+    <Compile Include="Models\Domain\CheckTypes.cs" />
     <Compile Include="Models\Domain\Class.cs" />
     <Compile Include="Models\Domain\Course.cs" />
     <Compile Include="Models\Domain\Lesson.cs" />
+    <Compile Include="Models\Domain\Room.cs" />
     <Compile Include="Models\Domain\Student.cs" />
     <Compile Include="Models\Domain\Teacher.cs" />
     <Compile Include="Models\Domain\User.cs" />
+    <Compile Include="Models\Domain\Weekday.cs" />
+    <Compile Include="Models\ViewModels\AttendancesViewModel.cs" />
+    <Compile Include="Models\ViewModels\CourseFormViewModel.cs" />
+    <Compile Include="Models\ViewModels\CoursesViewModel.cs" />
+    <Compile Include="Models\ViewModels\StudentsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApiService.cs" />
     <Compile Include="Services\AuthService.cs" />
@@ -156,6 +164,7 @@
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap-united.css" />
+    <Content Include="Content\bootstrap-yeti.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
@@ -368,6 +377,12 @@
     <Content Include="Views\Account\RegisterTeacher.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Account\RegisterStudent.cshtml" />
+    <Content Include="Views\Courses\ErrorPage.cshtml" />
+    <Content Include="Views\Courses\CourseForm.cshtml" />
+    <Content Include="Views\Classes\Index.cshtml" />
+    <Content Include="Views\Classes\GetStudents.cshtml" />
+    <Content Include="Views\Classes\GetCourses.cshtml" />
+    <Content Include="Views\Classes\GetRegistrations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

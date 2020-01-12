@@ -1,0 +1,42 @@
+﻿@model BackOffice.Models.ViewModels.StudentsViewModel
+
+@{
+    ViewBag.Title = "Elever";
+}
+
+<h2>Elever i @Model.ClassTitle</h2>
+
+@Html.ActionLink("Tilføj", "AddStudent", "Classes", null, new { @class = "btn-btm-margin btn btn-primary" })
+
+<table id="students" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Navn</th>
+        <th>Email</th>
+        <th>Fødselsdag</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var student in Model.Students)
+    {
+        <tr>
+            <td>@student.Id</td>
+            <td>@student.Name</td>
+            <td>@student.Email</td>
+            <td>@student.DateOfBirth</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#students").DataTable();
+
+        });
+    </script>
+}
+

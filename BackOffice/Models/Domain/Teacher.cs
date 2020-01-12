@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
-namespace RegistrationEngine.Models.Domain
+namespace BackOffice.Models.Domain
 {
     public class Teacher
     {
 
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(255)]
         public string Name { get; set; }
 
-        public List<Course> Courses { get; set; }
+        public string Email { get; set; }
+
+        public string ApplicationUserId { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
     }
 }

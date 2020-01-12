@@ -1,0 +1,41 @@
+﻿@model List<BackOffice.Models.Domain.Class>
+
+@{
+    ViewBag.Title = "Klasser";
+}
+
+<h2>Klasser</h2>
+
+@Html.ActionLink("Tilføj", "Add", "Classes", null, new { @class = "btn-btm-margin btn btn-primary" })
+
+<table id="classes" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Klassenavn</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var _class in Model)
+        {
+            <tr>
+                <td>@_class.Id</td>
+                <td>@_class.Title</td>
+                <td>@Html.ActionLink("Se elever", "GetStudents", "Classes", new { id = _class.Id, title = _class.Title }, new {@class="btn btn-primary btn-xs"})</td>
+                <td>@Html.ActionLink("Se kurser", "GetCourses", "Classes", new { id = _class.Id, title = _class.Title }, new {@class="btn btn-primary btn-xs"})</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#classes").DataTable();
+
+        });
+    </script>
+}

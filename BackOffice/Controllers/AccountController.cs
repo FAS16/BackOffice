@@ -56,7 +56,7 @@ namespace BackOffice.Controllers
 
                 HttpContent encodedRequest = new FormUrlEncodedContent(tokenRequest);
 
-                var response = await client.PostAsync(BaseUrl + "/Token", encodedRequest);
+                var response = await client.PostAsync(BaseUrl + "Token", encodedRequest);
                 
 
                 if (response.IsSuccessStatusCode)
@@ -66,6 +66,7 @@ namespace BackOffice.Controllers
 
                     // Store token in ASP.NET Session State
                     Session[TokenString] = token.AccessToken;
+                    Session[AuthService.TokenExpireDate] = token.Expires;
 
                     //Initialize user (singleton)
                     
@@ -74,6 +75,7 @@ namespace BackOffice.Controllers
 
                     User user = await GetTeacherInfo(token.UserName);
                     Models.Domain.User.Instance.Id = user.Id;
+
 
                     return RedirectToLocal(returnUrl);
 
@@ -192,7 +194,7 @@ namespace BackOffice.Controllers
                 {
 
 
-                    var response = await client.PostAsJsonAsync(BaseUrl + "/Api/Account/Register/Teacher", model);
+                    var response = await client.PostAsJsonAsync(BaseUrl + "Api/Account/Register/Teacher", model);
 
 
                     if (response.IsSuccessStatusCode)
@@ -222,7 +224,7 @@ namespace BackOffice.Controllers
                 {
 
 
-                    var response = await client.PostAsJsonAsync(BaseUrl + "/Api/Account/Register/Student", model);
+                    var response = await client.PostAsJsonAsync(BaseUrl + "Api/Account/Register/Student", model);
 
 
                     if (response.IsSuccessStatusCode)

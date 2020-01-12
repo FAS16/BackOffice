@@ -1,0 +1,77 @@
+﻿@using BackOffice.Models.Domain
+@model BackOffice.Models.ViewModels.AttendancesViewModel
+
+@{
+    ViewBag.Title = "Registreringer";
+}
+
+<h2>Elevregistreringer i faget @Model.CourseTitle - @Model.ClassTitle</h2>
+
+@Html.ActionLink("Tilføj", "", "Classes", null, new { @class = "btn-btm-margin btn btn-primary" })
+
+<table id="courses" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Dag</th>
+        <th>Lektion start</th>
+        <th>Lektion slut</th>
+        <th>Klasselokale</th>
+        <th>Klasselokale id</th>
+        <th>Tag Id</th>
+        <th>Device id (IMEI)</th>
+        <th>Elev id</th>
+        <th>Elev navn</th>
+        <th>Check ind/ud</th>
+        <th>Tidsstempel</th>
+    </tr>
+    </thead> 
+    <tbody>
+    @foreach (var att in Model.Attendances)
+    {
+
+        var className = "";
+
+        if(att.PossibleFraud)
+        {
+            className = "bgbg";
+
+        }
+
+        <tr class="@className">
+
+
+        <td>@att.Id</td>
+            <td>@att.Lesson.Weekday.Day</td>
+            <td>@att.Lesson.StartTime.ToString()</td>
+            <td>@att.Lesson.EndTime.ToString()</td>
+            <td>Lokale @att.Lesson.ClassRoom.Id</td>
+            <td>@att.Lesson.ClassRoom.RoomIdentifier</td>
+            <td>@att.TagId</td>
+            <td>@att.DeviceId</td>
+            <td>@att.StudentId</td>
+            <td>@att.Student.Name</td>
+            @if (@att.CheckType == CheckTypes.CheckIn)
+            {
+                <td>Ind</td>
+            }
+            else
+            {
+                <td>Ud</td>
+            }
+            <td>@att.Timestamp.ToString()</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#courses").DataTable();
+
+        });
+    </script>
+}
+

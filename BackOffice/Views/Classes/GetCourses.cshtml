@@ -1,0 +1,43 @@
+﻿@model BackOffice.Models.ViewModels.CoursesViewModel
+
+@{
+    ViewBag.Title = "Fag";
+}
+
+<h2>@Model.ClassTitle - Fag</h2>
+
+@Html.ActionLink("Tilføj", "AddCourse", "Classes", null, new { @class = "btn-btm-margin btn btn-primary" })
+
+<table id="courses" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Titel</th>
+        <th>Underviser</th>
+        <th>-</th>
+        <th class="delete-x"><b>x</b></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var course in Model.Courses)
+    {
+        <tr>
+            <td>@Html.ActionLink(course.Id.ToString(), "EditCourse", "Courses", new { id = course.Id }, null)</td>
+            <td>@course.Title</td>
+            <td>@Html.ActionLink(course.Teacher.Name, "EditTeacher", "Teachers", new { id = course.Teacher.Id }, null)</td>
+            <td>@Html.ActionLink("Se registreringer", "GetRegistrations", "Classes", new { courseId = course.Id,classId = Model.ClassId ,courseTitle = course.Title, classTitle = Model.ClassTitle }, new { @class = "btn btn-primary btn-xs" })</td>
+            <td>@Html.ActionLink("Slet", "DeleteCourse", "Courses", new { id = course.Id }, new { onclick = "return confirm('Er du sikker på du vil slette dette kursus?');" })</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#courses").DataTable();
+
+        });
+    </script>
+}
