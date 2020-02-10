@@ -27,41 +27,83 @@
     </tr>
     </thead> 
     <tbody>
-    @foreach (var att in Model.Attendances)
-    {
-
-        var className = "";
-
-        if(att.PossibleFraud)
+        @foreach (var att in Model.Attendances)
         {
-            className = "bgbg";
 
-        }
-
-        <tr class="@className">
-
-
-        <td>@att.Id</td>
-            <td>@att.Lesson.Weekday.Day</td>
-            <td>@att.Lesson.StartTime.ToString()</td>
-            <td>@att.Lesson.EndTime.ToString()</td>
-            <td>Lokale @att.Lesson.ClassRoom.Id</td>
-            <td>@att.Lesson.ClassRoom.RoomIdentifier</td>
-            <td>@att.TagId</td>
-            <td>@att.DeviceId</td>
-            <td>@att.StudentId</td>
-            <td>@att.Student.Name</td>
-            @if (@att.CheckType == CheckTypes.CheckIn)
+            if (att.PossibleFraud)
             {
-                <td>Ind</td>
+                <tr bgcolor="#FF5733">
+
+
+                    <td>@att.Id</td>
+                    <td>@att.Lesson.Weekday.Day</td>
+                    <td>@att.Lesson.StartTime.ToString()</td>
+                    <td>@att.Lesson.EndTime.ToString()</td>
+                    <td>Lokale @att.Lesson.ClassRoom.Id</td>
+                    <td>@att.Lesson.ClassRoom.RoomIdentifier</td>
+                    <td>@att.TagId</td>
+                    <td>@att.DeviceId</td>
+                    <td>@att.StudentId</td>
+                    <td>@att.Student.Name</td>
+                    @if (@att.CheckType == CheckTypes.CheckIn)
+                    {
+                        <td>Ind</td>
+                    }
+                    else
+                    {
+                        <td>Ud</td>
+                    }
+                    <td>@att.Timestamp.ToString()</td>
+                    @if (@att.PossibleFraud)
+                    {
+                        <td>1</td>
+                    }
+                    else
+                    {
+                        <td>0</td>
+                    }
+                </tr>
+
             }
             else
             {
-                <td>Ud</td>
+
+                <tr>
+
+
+                    <td>@att.Id</td>
+                    <td>@att.Lesson.Weekday.Day</td>
+                    <td>@att.Lesson.StartTime.ToString()</td>
+                    <td>@att.Lesson.EndTime.ToString()</td>
+                    <td>Lokale @att.Lesson.ClassRoom.Id</td>
+                    <td>@att.Lesson.ClassRoom.RoomIdentifier</td>
+                    <td>@att.TagId</td>
+                    <td>@att.DeviceId</td>
+                    <td>@att.StudentId</td>
+                    <td>@att.Student.Name</td>
+                    @if (@att.CheckType == CheckTypes.CheckIn)
+                    {
+                        <td>Ind</td>
+                    }
+                    else
+                    {
+                        <td>Ud</td>
+                    }
+                    <td>@att.Timestamp.ToString()</td>
+                    @if (@att.PossibleFraud)
+                    {
+                        <td>1</td>
+                    }
+                    else
+                    {
+                        <td>0</td>
+                    }
+                </tr>
+
             }
-            <td>@att.Timestamp.ToString()</td>
-        </tr>
-    }
+
+
+        }
     </tbody>
 </table>
 
